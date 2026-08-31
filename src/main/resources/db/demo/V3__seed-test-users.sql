@@ -1,4 +1,4 @@
--- Contas de demonstração. A senha de acesso está documentada no README e é armazenada somente como BCrypt.
+--contas teste
 INSERT INTO usuario (nome, email, senha, criado_em) VALUES
     ('Gray Fox', 'gray.fox@pulso.com', '$2a$10$Q8Abg5N/2fgVS9qTT1BLTeiQ0t1iVwovU/rcITYaaJNbq3Khwdb3C', CURRENT_TIMESTAMP),
     ('Solid Snake', 'solid.snake@pulso.com', '$2a$10$6nADZsSZrlnsmEYepGeJAeneh/IjFeXj8ZIfYb8UErpOmBvcZid.e', CURRENT_TIMESTAMP),
