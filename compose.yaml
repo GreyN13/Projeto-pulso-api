@@ -3,7 +3,7 @@ services:
     image: mysql:8.0
     container_name: pulso-banco
     environment:
-      MYSQL_DATABASE: pulso
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-pulso}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Defina MYSQL_ROOT_PASSWORD no arquivo .env}
     ports:
       - "3307:3306"
@@ -25,7 +25,9 @@ services:
       banco:
         condition: service_healthy
     environment:
-      DB_URL: jdbc:mysql://banco:3306/pulso
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-demo}
+      DB_URL: jdbc:mysql://banco:3306/${MYSQL_DATABASE:-pulso}
+      DEMO_DB_URL: jdbc:mysql://banco:3306/${MYSQL_DATABASE:-pulso}
       DB_USERNAME: root
       DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Defina MYSQL_ROOT_PASSWORD no arquivo .env}
     ports:
