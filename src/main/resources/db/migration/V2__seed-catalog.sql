@@ -1,0 +1,46 @@
+INSERT INTO artista (nome, biografia, imagem_url) VALUES
+    ('Loopcinema', 'Projeto musical brasileiro independente, com lançamentos como LOOP:GLAMOUR e My-Lovely-Yellow-Kombi.', NULL),
+    ('Jorge Ben', 'Cantor, compositor e músico brasileiro, também conhecido como Jorge Ben Jor.', 'https://upload.wikimedia.org/wikipedia/commons/f/ff/IBPA_2187_-_Show_N%C3%ADvea_com_Jorge_Benjor%2C_Skank_e_C%C3%A9u_-_2017-04-02_-_Ricardo_Giusti-PMPA_%28cropped%29.jpg'),
+    ('Ave Sangria', 'Conjunto musical brasileiro de rock psicodélico e expoente da cena pernambucana dos anos 1970.', 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Ave_Sangria_live_in_2011.jpg'),
+    ('Arthur Verocai', 'Pianista, violonista, compositor, arranjador e maestro brasileiro.', NULL),
+    ('Milton Nascimento', 'Cantor, compositor e multi-instrumentista brasileiro, conhecido como um dos nomes centrais da música brasileira.', 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Milton_Nascimento%2C_October_2022.jpg');
+
+INSERT INTO album (titulo, capa_url, ano, artista_id) VALUES
+    ('LOOP:GLAMOUR', NULL, 2025, (SELECT id FROM artista WHERE nome = 'Loopcinema')),
+    ('My-Lovely-Yellow-Kombi', NULL, 2026, (SELECT id FROM artista WHERE nome = 'Loopcinema')),
+    ('Força Bruta', NULL, 1970, (SELECT id FROM artista WHERE nome = 'Jorge Ben')),
+    ('Samba Esquema Novo', 'https://coverartarchive.org/release/f244c760-f055-4099-9b80-70cef5ef1f74/front', 1963, (SELECT id FROM artista WHERE nome = 'Jorge Ben')),
+    ('A Tábua de Esmeralda', NULL, 1974, (SELECT id FROM artista WHERE nome = 'Jorge Ben')),
+    ('Ave Sangria', 'https://coverartarchive.org/release/7c92b04b-890a-4d6d-b506-76f6de28c365/front', 1974, (SELECT id FROM artista WHERE nome = 'Ave Sangria')),
+    ('Arthur Verocai', NULL, 1972, (SELECT id FROM artista WHERE nome = 'Arthur Verocai')),
+    ('Clube da Esquina', NULL, 1972, (SELECT id FROM artista WHERE nome = 'Milton Nascimento'));
+
+INSERT INTO musica (titulo, arquivo_url, duracao_segundos, album_id) VALUES
+    ('CINEMA', 'https://music.youtube.com/search?q=CINEMA%20loopcinema', 201,
+        (SELECT id FROM album WHERE titulo = 'LOOP:GLAMOUR')),
+    ('Complexo de Socialite', 'https://music.youtube.com/search?q=Complexo%20de%20Socialite%20loopcinema', 284,
+        (SELECT id FROM album WHERE titulo = 'LOOP:GLAMOUR')),
+    ('DISCO: Lada', 'https://music.youtube.com/search?q=DISCO%20Lada%20loopcinema', 237,
+        (SELECT id FROM album WHERE titulo = 'LOOP:GLAMOUR')),
+    ('MUSIC: Is My Life', 'https://music.youtube.com/search?q=MUSIC%20Is%20My%20Life%20loopcinema', 268,
+        (SELECT id FROM album WHERE titulo = 'LOOP:GLAMOUR')),
+    ('My-Lovely-Little-Flamingo', 'https://music.youtube.com/search?q=My-Lovely-Little-Flamingo%20loopcinema', 592,
+        (SELECT id FROM album WHERE titulo = 'My-Lovely-Yellow-Kombi')),
+    ('Don''t-Stop / Can''t-Stop', 'https://music.youtube.com/search?q=Dont-Stop%20Cant-Stop%20loopcinema', 497,
+        (SELECT id FROM album WHERE titulo = 'My-Lovely-Yellow-Kombi')),
+    ('Saia-Amarela', 'https://music.youtube.com/search?q=Saia-Amarela%20loopcinema', 445,
+        (SELECT id FROM album WHERE titulo = 'My-Lovely-Yellow-Kombi')),
+    ('Rice:Beans', 'https://music.youtube.com/search?q=Rice%20Beans%20loopcinema', 524,
+        (SELECT id FROM album WHERE titulo = 'My-Lovely-Yellow-Kombi')),
+    ('Oba, Lá Vem Ela', 'https://open.spotify.com/track/6HO4Z6u6b7fOYbJrPGSZjC', 253,
+        (SELECT id FROM album WHERE titulo = 'Força Bruta')),
+    ('Mas, Que Nada!', 'https://music.youtube.com/search?q=Mas%20Que%20Nada%20Jorge%20Ben', 182,
+        (SELECT id FROM album WHERE titulo = 'Samba Esquema Novo')),
+    ('Os Alquimistas Estão Chegando os Alquimistas', 'https://music.youtube.com/search?q=Os%20Alquimistas%20Estao%20Chegando%20Jorge%20Ben', 195,
+        (SELECT id FROM album WHERE titulo = 'A Tábua de Esmeralda')),
+    ('Dois Navegantes', 'https://music.youtube.com/search?q=Dois%20Navegantes%20Ave%20Sangria', 256,
+        (SELECT id FROM album WHERE titulo = 'Ave Sangria')),
+    ('Na Boca do Sol', 'https://open.spotify.com/track/5oiueCPkJCU9wCmQO5HDTj', 179,
+        (SELECT id FROM album WHERE titulo = 'Arthur Verocai')),
+    ('Tudo o Que Você Podia Ser', 'https://music.youtube.com/search?q=Tudo%20o%20Que%20Voce%20Podia%20Ser%20Milton%20Nascimento', 172,
+        (SELECT id FROM album WHERE titulo = 'Clube da Esquina'));

@@ -1,0 +1,35 @@
+services:
+  banco:
+    image: mysql:8.0
+    container_name: pulso-banco
+    environment:
+      MYSQL_DATABASE: pulso
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Defina MYSQL_ROOT_PASSWORD no arquivo .env}
+    ports:
+      - "3307:3306"
+    volumes:
+      - pulso_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pulso-api
+    depends_on:
+      banco:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:mysql://banco:3306/pulso
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Defina MYSQL_ROOT_PASSWORD no arquivo .env}
+    ports:
+      - "8080:8080"
+
+volumes:
+  pulso_mysql_data:
